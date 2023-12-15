@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppContainer from './components/AppContainer.vue';
+
 </script>
 
 <template>
@@ -12,5 +13,4 @@ import AppContainer from './components/AppContainer.vue';
 body {
   margin: 0 !important;
 }
-
 </style>

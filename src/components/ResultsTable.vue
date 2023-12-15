@@ -1,14 +1,17 @@
 <template>
-    <a-table class="table" :columns="columns" :dataSource="dataSource" :pagination="{ pageSize }">
-        
-    </a-table>
+    <div style="display: block; width: 100%">
+        <a-spin class="spinner" :spinning="props.loading">
+            <a-table class="table" :columns="columns" :dataSource="props.data" :pagination="{ pageSize }"></a-table>
+        </a-spin>
+    </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
-import { Table as ATable } from 'ant-design-vue';
+import { Table as ATable, Spin as ASpin } from 'ant-design-vue';
+import { defineProps } from 'vue';
 
-type DataPiece = {
+export type DataPiece = {
     name: string,
     budget: number,
     status: string,
@@ -16,92 +19,10 @@ type DataPiece = {
     date: Date,
 }
 
-const dataSource = reactive<DataPiece[]>([
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-    {
-        name: 'some name',
-        budget: 1000,
-        status: 'some status',
-        pta: 'some pta',
-        date: new Date(),
-    },
-])
+const props = defineProps({
+    data: Array<DataPiece>,
+    loading: Boolean,
+})
 
 const columns = reactive<Array<{ title: string, key: string, dataIndex?: string }>>([
     {
@@ -120,7 +41,7 @@ const columns = reactive<Array<{ title: string, key: string, dataIndex?: string 
         key: 'status',
     },
     {
-        title: 'PTA',
+        title: 'Ответственный',
         dataIndex: 'pta',
         key: 'pta',
     },
@@ -156,6 +77,12 @@ onUnmounted(() => {
 <style>
 .table {
     width: 100%;
+    display: block;
+}
+
+.spinner {
+    width: 100%;
     margin-top: 1rem;
+    display: block;
 }
 </style>

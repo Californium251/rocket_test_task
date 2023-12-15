@@ -1,14 +1,28 @@
 <script setup lang="ts">
 import AppHeader from './AppHeader.vue'
 import ResultsTable from './ResultsTable.vue'
+import { ref } from 'vue';
+import type { DataPiece } from './ResultsTable.vue';
+
+const data = ref<Array<DataPiece>>([]);
+const loading = ref<boolean>(false);
+
+const updateData = (newData: Array<DataPiece>) => {
+    data.value = newData;
+}
+
+const updateLoading = (newVal: boolean) => {
+    loading.value = newVal;
+}
+
 </script>
 
 <template>
     <div class="app-background">
         <div class="app-container">
-            <AppHeader />
+            <AppHeader @update:data="updateData" @update:loading="updateLoading" :loading="loading" />
             <hr>
-            <ResultsTable />
+            <ResultsTable :data="data" :loading="loading" />
         </div>    
     </div>
 </template>
