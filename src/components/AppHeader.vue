@@ -17,7 +17,7 @@
 </style>
 
 <script setup lang="ts">
-import { ref, defineEmits, defineProps } from 'vue';
+import { ref } from 'vue';
 import { TypographyTitle, InputSearch, Divider } from 'ant-design-vue';
 import axios from 'axios';
 
@@ -34,7 +34,7 @@ const parseData = (query: string) => query.split(';').reduce((acc: { [key: strin
 }, {});
 
 const getData = async (query: string) => {
-    const url = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/amocrm';
+    const url = import.meta.env.VITE_API_URL;
     const res = await axios.get(url, { params: parseData(query) })
     return res.data;
 }
