@@ -20,6 +20,7 @@
 import { ref } from 'vue';
 import { TypographyTitle, InputSearch, Divider } from 'ant-design-vue';
 import axios from 'axios';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 const props = defineProps({
     loading: Boolean,
@@ -35,6 +36,7 @@ const parseData = (query: string) => query.split(';').reduce((acc: { [key: strin
 
 const getData = async (query: string) => {
     const url = import.meta.env.VITE_API_URL;
+    console.log(url);
     const res = await axios.get(url, { params: parseData(query) })
     return res.data;
 }
